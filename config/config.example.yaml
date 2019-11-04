@@ -1,0 +1,9 @@
+port: 6004
+connect: root:@tcp(localhost:3306)/test?charset=utf8&multiStatements=true
+connectType: mysql
+redisConnect: 127.0.0.1:6379
+redisPwd: web123456
+cacheTime: 60
+loginCacheTime: 7200
+resource: /Users/zengzhiyong/work/resource/
+resourceHttp: http://localhost:7001/

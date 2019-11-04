@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common"
+	. "goApiFrame/web/common"
 	"net/http"
 )
 
 func init() {
-	common.InitConfig()
-	common.InitLogger()
-	common.InitDataEngine()
+	InitConfig()
+	InitLogger()
+	InitDataEngine()
 }
 
 func main() {
@@ -21,5 +21,6 @@ func main() {
 	err := r.Run(":8080")
 	if err != nil {
 		fmt.Println("run err:", err)
+		Log.Error(err.Error())
 	}
 }

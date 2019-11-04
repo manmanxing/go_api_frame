@@ -4,15 +4,19 @@ import (
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"time"
 )
 
 var MyConfig Config
 
 //使用yaml，初始化配置文件
 type Config struct {
-	Port        string `yaml:"port"`
-	Connect     string `yaml:"connect"`
-	ConnectType string `yaml:"connectType"`
+	Port            string        `yaml:"port"`
+	Connect         string        `yaml:"connect"`
+	ConnectType     string        `yaml:"connectType"`
+	MaxIdleConns    int           `yaml:"maxIdleConns"`
+	MaxOpenConns    int           `yaml:"maxOpenConns"`
+	ConnMaxLifetime time.Duration `yaml:"connMaxLifetime"`
 
 	Loglevel       string `yaml:"loglevel"`
 	HookMaxSize    int    `yaml:"hookMaxSize"`

@@ -13,6 +13,14 @@ type Config struct {
 	Port        string `yaml:"port"`
 	Connect     string `yaml:"connect"`
 	ConnectType string `yaml:"connectType"`
+
+	Loglevel       string `yaml:"loglevel"`
+	HookMaxSize    int    `yaml:"hookMaxSize"`
+	HookFilename   string `yaml:"hookFilename"`
+	HookMaxBackups int    `yaml:"hookMaxBackups"`
+	HookMaxAge     int    `yaml:"hookMaxAge"`
+	HookCompress   bool   `yaml:"hookCompress"`
+	ServiceName    string `yaml:"serviceName"`
 }
 
 func InitConfig() {

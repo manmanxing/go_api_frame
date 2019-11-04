@@ -14,6 +14,7 @@ func InitDataEngine() {
 	Engine, err := xorm.NewEngine(MyConfig.ConnectType, MyConfig.Connect)
 	if err != nil {
 		fmt.Println("init data engine err:", err)
+		Log.Error(err.Error())
 	}
 	//在控制台打印出SQL语句
 	Engine.ShowSQL(true)

@@ -3,8 +3,15 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"goApiFrame/web/common"
 	"net/http"
 )
+
+func init() {
+	common.InitConfig()
+	common.InitLogger()
+	common.InitDataEngine()
+}
 
 func main() {
 	r := gin.Default()

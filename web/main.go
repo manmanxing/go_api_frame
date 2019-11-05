@@ -18,7 +18,7 @@ func main() {
 	r.GET("/test", func(context *gin.Context) {
 		context.String(http.StatusOK, "hello goApiFrame")
 	})
-	err := r.Run(":8080")
+	err := r.Run(":", MyConfig.Port)
 	if err != nil {
 		fmt.Println("run err:", err)
 		Log.Error(err.Error())

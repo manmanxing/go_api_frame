@@ -7,12 +7,10 @@ import (
 )
 
 type UserInfo struct {
-	Id         string `xorm:"varchar(50) 'id'" json:"id" valid:",optional"`
-	Name       string `xorm:"varchar(50) 'name'" json:"name" valid:"stringlength(1|50)"`
-	Status     int    `xorm:"smallint(2) 'status'" json:"status" valid:"range(0|100)"`
-	CustomerId string `xorm:"varchar(50) 'customer_id'" json:"customer_id" valid:"stringlength(1|50)"`
-	UserId     string `xorm:"varchar(50) 'user_id'" json:"user_id" valid:"stringlength(1|50)"`
-	//	Money       string    `xorm:"decimal(12,2) 'money'" json:"money"`
+	Id          string    `xorm:"varchar(50) 'id'" json:"id" valid:",optional"`
+	Name        string    `xorm:"varchar(50) 'name'" json:"name" valid:"stringlength(1|50)"`
+	Password    string    `xorm:"varchar(50) 'password'" json:"password" valid:"stringlength(1|50)"`
+	Status      int       `xorm:"smallint(2) 'status'" json:"status" valid:"range(0|100)"`
 	Remark      string    `xorm:"varchar(500) 'remark'" json:"remark" valid:"stringlength(0|500)"`
 	StartTime   string    `xorm:"DATE 'start_time'" json:"start_time" valid:"data,required"`
 	EndTime     string    `xorm:"DATE 'end_time'" json:"end_time" valid:"data,required"`
@@ -24,9 +22,8 @@ func main() {
 	u := UserInfo{
 		Id:          "",
 		Name:        "admin",
+		Password:    "123456",
 		Status:      1,
-		CustomerId:  "edeqcfadc",
-		UserId:      "sadafadf",
 		Remark:      "",
 		StartTime:   "",
 		EndTime:     "",

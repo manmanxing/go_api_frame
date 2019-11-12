@@ -13,7 +13,7 @@ func UserCreate(ctx *gin.Context) interface{} {
 	user = model.UserInfo{
 		Id:          "",
 		Name:        "admin",
-		Password:    "123456",
+		Password:    "12346",
 		Status:      1,
 		Remark:      "",
 		StartTime:   "2019-01-01",

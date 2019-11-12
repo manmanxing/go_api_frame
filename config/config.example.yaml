@@ -15,6 +15,10 @@ hookCompress: true                #是否压缩
 #系统相关
 serviceName: goApiFrame           #服务名
 port: 6004                        #web端口
+host: 127.0.0.1
 
 #捕获异常邮件设置
 sendEmail: true
+fromEmailUser: admin  #发件人
+toEmailUser: tom  #收件人，可以为多个，以逗号隔开
+emailPass: 123456

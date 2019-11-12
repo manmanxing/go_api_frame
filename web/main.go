@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	. "goApiFrame/web/common"
 	"goApiFrame/web/middleware/log"
-	"goApiFrame/web/middleware/validator"
 	"goApiFrame/web/router"
 	"strconv"
 )
@@ -18,7 +17,7 @@ func init() {
 func main() {
 	//gin.SetMode(gin.ReleaseMode)  //生产环境使用
 	r := gin.Default()
-	r.Use(log.Logger(), validator.Validator())
+	r.Use(log.Logger())
 	router.UserRouter(r)
 	err := r.Run(":" + strconv.Itoa(MyConfig.Port))
 	if err != nil {

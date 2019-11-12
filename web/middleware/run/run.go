@@ -1,8 +1,8 @@
 package run
 
 import (
+	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/middleware/email"
 	"goApiFrame/web/resultInfo"
 )
 
@@ -29,17 +29,17 @@ func ErrHandle(c *gin.Context, e interface{}) {
 	switch value := e.(type) {
 	case string:
 		result := resultInfo.GetErr(e.(string))
-		go email.Email(result.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
+		//go email.Email(result.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
 		c.JSON(500, gin.H{
 			"code":  result.Code,
 			"error": result.Msg,
 			"data":  nil,
 		})
-	case resultInfo.ResultInfo:
-		go email.Email(value.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
+	case *validation.Error:
+		//go email.Email(value.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
 		c.JSON(500, gin.H{
-			"code":  value.Code,
-			"error": value.Msg,
+			"code":  "",
+			"error": value.Message,
 			"data":  nil,
 		})
 	}

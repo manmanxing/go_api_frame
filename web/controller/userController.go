@@ -1,28 +1,34 @@
 package controller
 
 import (
+	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/middleware/validator"
 	"goApiFrame/web/model"
-	"goApiFrame/web/resultInfo"
 	"time"
 )
 
 func UserCreate(ctx *gin.Context) interface{} {
-	var user model.UserInfo
-	user = model.UserInfo{
+	user := &model.UserInfo{
 		Id:          "",
 		Name:        "admin",
-		Password:    "12346",
+		Password:    "123456",
 		Status:      1,
 		Remark:      "",
-		StartTime:   "2019-01-01",
+		StartTime:   "2019-01-ergfer01",
 		EndTime:     "2019-01-02",
 		CreatedTime: time.Time{},
 		UpdatedTime: time.Time{},
 	}
-	if !validator.CheckValidator(user) {
-		panic(resultInfo.Params_err)
+	valid := validation.Validation{}
+	b, err := valid.Valid(user)
+	if err != nil {
+		panic(err.Error())
+	}
+	if !b {
+		for _, err := range valid.Errors {
+			//log.Println(err.Key, err.Message)
+			panic(err)
+		}
 	}
 	return user.Create()
 }

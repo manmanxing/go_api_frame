@@ -11,8 +11,6 @@ import (
 	"time"
 )
 
-var Log *zap.Logger
-
 //自定义日志中间件
 func Logger() gin.HandlerFunc {
 	hook := lumberjack.Logger{
@@ -24,11 +22,11 @@ func Logger() gin.HandlerFunc {
 	}
 
 	encoderConfig := zapcore.EncoderConfig{
-		TimeKey:        "time",  //输出时间的key名
-		LevelKey:       "level", //输出日志级别的key名
-		NameKey:        "logger",
-		CallerKey:      "caller",
-		MessageKey:     "msg", //输入信息的key名
+		TimeKey:  "time",  //输出时间的key名
+		LevelKey: "level", //输出日志级别的key名
+		NameKey:  "logger",
+		//CallerKey:      "caller",
+		//MessageKey:     "msg", //输入信息的key名
 		StacktraceKey:  "stacktrace",
 		LineEnding:     zapcore.DefaultLineEnding,      //每行的分隔符。基本zapcore.DefaultLineEnding 即"\n"
 		EncodeLevel:    zapcore.LowercaseLevelEncoder,  // 小写编码器
@@ -82,7 +80,7 @@ func Logger() gin.HandlerFunc {
 			zap.String("client_ip", clientIP),
 		)
 		// 构造日志
-		Log = zap.New(core, caller, development, filed)
+		Log := zap.New(core, caller, development, filed)
 		Log.Info("")
 	}
 }

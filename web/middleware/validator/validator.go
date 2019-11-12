@@ -25,6 +25,8 @@ func Validator() gin.HandlerFunc {
 
 func CheckValidator(object interface{}) bool {
 	result, err := govalidator.ValidateStruct(object)
-	fmt.Println(err)
+	if err != nil {
+		fmt.Println(err)
+	}
 	return result
 }

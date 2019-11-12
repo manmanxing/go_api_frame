@@ -1,9 +1,6 @@
-package main
+package model
 
 import (
-	"fmt"
-	"github.com/asaskevich/govalidator"
-	"goApiFrame/web/util"
 	"time"
 )
 
@@ -19,7 +16,7 @@ type UserInfo struct {
 	UpdatedTime time.Time `xorm:"DATETIME updated 'update_time'" json:"update_time" valid:"-"`
 }
 
-func main() {
+func (user UserInfo) Create() UserInfo {
 	u := UserInfo{
 		Id:          "",
 		Name:        "admin",
@@ -31,20 +28,5 @@ func main() {
 		CreatedTime: time.Time{},
 		UpdatedTime: time.Time{},
 	}
-	//全局变量
-	//当设置为true时，如果没有定义valid tag，则会提示错误
-	//当设置为false时，如果没有定义valid tag，不会提示错误。默认值就是false
-	//字符串使用utf8.RuneCountInString统计长度
-	govalidator.SetFieldsRequiredByDefault(true)
-	govalidator.TagMap["date"] = func(str string) bool {
-		_, err := time.Parse(util.DateFormat, str)
-		return err == nil
-	}
-	result, err := govalidator.ValidateStruct(u)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println(result)
-
+	return u
 }

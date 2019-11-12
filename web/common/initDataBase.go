@@ -1,9 +1,9 @@
 package common
 
 import (
-	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
+	"log"
 	"time"
 	"xorm.io/core"
 )
@@ -13,8 +13,7 @@ var Engine *xorm.Engine
 func InitDataEngine() {
 	Engine, err := xorm.NewEngine(MyConfig.ConnectType, MyConfig.Connect)
 	if err != nil {
-		fmt.Println("init data engine err:", err)
-		Log.Error(err.Error())
+		log.Fatal("init data engine err:", err)
 	}
 	//在控制台打印出SQL语句
 	Engine.ShowSQL(true)

@@ -1,23 +1,26 @@
-package common
+package log
 
 import (
+	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"goApiFrame/web/common"
+	"goApiFrame/web/util"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
+	"time"
 )
 
 var Log *zap.Logger
 
-//lumberjack切割日志，不足之处，在于日志切割后日志，其文件名过于复杂，可能不便后后继处理
-//日志名示例：system-2019-11-04T06-21-46.400
-func InitLogger() {
+//自定义日志中间件
+func Logger() gin.HandlerFunc {
 	hook := lumberjack.Logger{
-		Filename:   MyConfig.HookFilename,   // 日志文件路径
-		MaxSize:    MyConfig.HookMaxSize,    // 每个日志文件保存的最大尺寸 单位：M
-		MaxBackups: MyConfig.HookMaxBackups, // 日志文件最多保存多少个备份
-		MaxAge:     MyConfig.HookMaxAge,     // 文件最多保存多少天
-		Compress:   MyConfig.HookCompress,   // 是否压缩
+		Filename:   "./logs/" + time.Now().Format(util.DateFormat) + ".log", // 日志文件路径
+		MaxSize:    common.MyConfig.HookMaxSize,                             // 每个日志文件保存的最大尺寸 单位：M
+		MaxBackups: common.MyConfig.HookMaxBackups,                          // 日志文件最多保存多少个备份
+		MaxAge:     common.MyConfig.HookMaxAge,                              // 文件最多保存多少天
+		Compress:   common.MyConfig.HookCompress,                            // 是否压缩
 	}
 
 	encoderConfig := zapcore.EncoderConfig{
@@ -37,7 +40,7 @@ func InitLogger() {
 
 	// 设置日志级别,debug可以打印出info,debug,warn；info级别可以打印warn，info；warn只能打印warn
 	var level zapcore.Level
-	switch MyConfig.Loglevel {
+	switch common.MyConfig.Loglevel {
 	case "debug":
 		level = zap.DebugLevel
 	case "info":
@@ -48,7 +51,6 @@ func InitLogger() {
 		level = zap.InfoLevel
 	}
 	atomicLevel := zap.NewAtomicLevelAt(level)
-
 	core := zapcore.NewCore(
 		zapcore.NewJSONEncoder(encoderConfig),                                           // 编码器配置
 		zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(&hook)), // 打印到控制台和文件
@@ -59,9 +61,28 @@ func InitLogger() {
 	caller := zap.AddCaller()
 	// 开启文件及行号
 	development := zap.Development()
-	// 设置初始化字段
-	filed := zap.Fields(zap.String("serviceName", MyConfig.ServiceName))
-	// 构造日志
-	Log = zap.New(core, caller, development, filed)
-	Log.Info("DefaultLogger init success")
+
+	return func(context *gin.Context) {
+		startTime := time.Now()
+		context.Next()
+		endTime := time.Now()
+		//执行时间
+		useTime := endTime.Sub(startTime)
+		requestMethod := context.Request.Method
+		requestUrl := context.Request.RequestURI
+		statusCode := context.Writer.Status()
+		clientIP := context.ClientIP()
+		// 设置初始化字段
+		filed := zap.Fields(
+			zap.String("service_name", common.MyConfig.ServiceName),
+			zap.Any("status_code", statusCode),
+			zap.Duration("cost_time", useTime),
+			zap.String("request_method", requestMethod),
+			zap.String("request_url", requestUrl),
+			zap.String("client_ip", clientIP),
+		)
+		// 构造日志
+		Log = zap.New(core, caller, development, filed)
+		Log.Info("")
+	}
 }

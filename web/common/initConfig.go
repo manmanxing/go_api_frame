@@ -1,7 +1,7 @@
 package common
 
 import (
-	"fmt"
+	"github.com/prometheus/common/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"time"
@@ -20,7 +20,6 @@ type Config struct {
 
 	Loglevel       string `yaml:"loglevel"`
 	HookMaxSize    int    `yaml:"hookMaxSize"`
-	HookFilename   string `yaml:"hookFilename"`
 	HookMaxBackups int    `yaml:"hookMaxBackups"`
 	HookMaxAge     int    `yaml:"hookMaxAge"`
 	HookCompress   bool   `yaml:"hookCompress"`
@@ -31,11 +30,11 @@ func InitConfig() {
 	config := new(Config)
 	yamlFile, err := ioutil.ReadFile("config/config.yaml")
 	if err != nil {
-		fmt.Println("read yaml file err:", err)
+		log.Fatal("read yaml file err:", err)
 	}
 	err = yaml.Unmarshal(yamlFile, config)
 	if err != nil {
-		fmt.Println("unmarshal yaml err:", err)
+		log.Fatal("unmarshal yaml err:", err)
 	}
 	MyConfig = *config
 }

@@ -11,19 +11,23 @@ var MyConfig Config
 
 //使用yaml，初始化配置文件
 type Config struct {
-	Port            string        `yaml:"port"`
+	Host            string        `yaml:"host"`
+	Port            int           `yaml:"port"`
 	Connect         string        `yaml:"connect"`
 	ConnectType     string        `yaml:"connectType"`
 	MaxIdleConns    int           `yaml:"maxIdleConns"`
 	MaxOpenConns    int           `yaml:"maxOpenConns"`
 	ConnMaxLifetime time.Duration `yaml:"connMaxLifetime"`
-
-	Loglevel       string `yaml:"loglevel"`
-	HookMaxSize    int    `yaml:"hookMaxSize"`
-	HookMaxBackups int    `yaml:"hookMaxBackups"`
-	HookMaxAge     int    `yaml:"hookMaxAge"`
-	HookCompress   bool   `yaml:"hookCompress"`
-	ServiceName    string `yaml:"serviceName"`
+	Loglevel        string        `yaml:"loglevel"`
+	HookMaxSize     int           `yaml:"hookMaxSize"`
+	HookMaxBackups  int           `yaml:"hookMaxBackups"`
+	HookMaxAge      int           `yaml:"hookMaxAge"`
+	HookCompress    bool          `yaml:"hookCompress"`
+	ServiceName     string        `yaml:"serviceName"`
+	SendEmail       bool          `yaml:"sendEmail"`
+	FromEmailUser   string        `yaml:"fromEmailUser"`
+	ToEmailUSer     string        `yaml:"toEmailUser"`
+	EmailPass       string        `yaml:"emailPass"`
 }
 
 func InitConfig() {

@@ -7,8 +7,7 @@ connMaxLifetime: 5                #默认最大值为10
 
 #日志文件
 loglevel: debug                   # debug   info   error
-hookMaxSize: 128                  #每个日志文件保存的最大尺寸 单位：M
-hookFilename: ./logs/system.log   #日志文件路径
+hookMaxSize: 1024                  #每个日志文件保存的最大尺寸 单位：M
 hookMaxBackups: 3                 #日志文件最多保存多少个备份
 hookMaxAge: 30                    #文件最多保存多少天
 hookCompress: true                #是否压缩
@@ -16,3 +15,6 @@ hookCompress: true                #是否压缩
 #系统相关
 serviceName: goApiFrame           #服务名
 port: 6004                        #web端口
+
+#捕获异常邮件设置
+sendEmail: true

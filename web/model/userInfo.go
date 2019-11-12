@@ -17,16 +17,5 @@ type UserInfo struct {
 }
 
 func (user UserInfo) Create() UserInfo {
-	u := UserInfo{
-		Id:          "",
-		Name:        "admin",
-		Password:    "12345",
-		Status:      1,
-		Remark:      "",
-		StartTime:   "2019-01-01",
-		EndTime:     "2019-01-02",
-		CreatedTime: time.Time{},
-		UpdatedTime: time.Time{},
-	}
-	return u
+	return user
 }

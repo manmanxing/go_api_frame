@@ -8,6 +8,7 @@ import (
 	"goApiFrame/web/middleware/validator"
 	"goApiFrame/web/router"
 	"net/http"
+	"strconv"
 )
 
 func init() {
@@ -23,7 +24,7 @@ func main() {
 		context.String(http.StatusOK, "hello goApiFrame")
 	})
 	router.UserRouter(r)
-	err := r.Run(":" + MyConfig.Port)
+	err := r.Run(":" + strconv.Itoa(MyConfig.Port))
 	if err != nil {
 		fmt.Println(fmt.Errorf("engine run err %s", err))
 	}

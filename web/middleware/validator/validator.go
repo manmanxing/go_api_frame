@@ -14,6 +14,7 @@ func Validator() gin.HandlerFunc {
 	//当设置为false时，如果没有定义valid tag，不会提示错误。默认值就是false
 	//字符串使用utf8.RuneCountInString统计长度
 	govalidator.SetFieldsRequiredByDefault(true)
+	//自定义验证器
 	govalidator.TagMap["date"] = func(str string) bool {
 		_, err := time.Parse(util.DateFormat, str)
 		return err == nil

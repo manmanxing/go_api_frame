@@ -29,7 +29,7 @@ type Config struct {
 	ToEmailUSer     string        `yaml:"toEmailUser"`
 	EmailPass       string        `yaml:"emailPass"`
 	EmailPort       string        `yaml:"emailPort"`
-	EmailSSL        string        `yaml:"emailSSL"`
+	EmailSSL        bool          `yaml:"emailSSL"`
 }
 
 func InitConfig() {

@@ -6,7 +6,7 @@ import (
 	"goApiFrame/web/middleware/run"
 )
 
-func UserRouter(r *gin.Engine) {
+func TestUserRouter(r *gin.Engine) {
 	r.GET("/test/user",
 		run.Run(controller.UserCreate))
 }

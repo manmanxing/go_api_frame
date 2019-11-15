@@ -24,11 +24,11 @@ type UserInfo struct {
 func (u *UserInfo) Valid(v *validation.Validation) {
 	if strings.Index(u.Name, "admin") != -1 {
 		// 通过 SetError 设置 Name 的错误信息，HasErrors 将会返回 true
-		v.SetError("Name", "名称里不能含有 admin")
+		_ = v.SetError("Name", "名称里不能含有 admin")
 	}
 	if util.JudgeDate(u.StartTime, u.EndTime) {
 	} else {
-		v.SetError("Date", "日期格式错误")
+		_ = v.SetError("Date", "日期格式错误")
 	}
 }
 

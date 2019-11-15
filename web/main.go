@@ -19,7 +19,7 @@ func main() {
 	//gin.SetMode(gin.ReleaseMode)  //生产环境使用
 	r := gin.Default()
 	r.Use(Logger())
-	router.UserRouter(r)
+	router.TestUserRouter(r)
 	err := r.Run(":" + strconv.Itoa(MyConfig.Port))
 	if err != nil {
 		fmt.Println(fmt.Errorf("engine run err %s", err))

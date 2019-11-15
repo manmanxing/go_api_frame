@@ -1,7 +1,7 @@
 package errcode
 
 //自定义错误返回信息
-//code=1 表示成功，code=-1 表示失败。
+//code=0 表示成功，其他表示失败。
 //msg 表示提示信息。
 //data 表示要返回的数据。
 type ResultInfo struct {
@@ -29,7 +29,6 @@ func GetErr(code string) ResultInfo {
 }
 
 var ErrMap = map[string]string{
-	"0":      "",
 	"100002": "参数错误",
 }
 

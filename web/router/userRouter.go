@@ -7,6 +7,6 @@ import (
 )
 
 func UserRouter(r *gin.Engine) {
-	r.GET("/user",
+	r.GET("/test/user",
 		run.Run(controller.UserCreate))
 }

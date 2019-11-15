@@ -3,6 +3,8 @@ package controller
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
+	"goApiFrame/web/middleware/log"
 	"goApiFrame/web/model"
 	"time"
 )
@@ -26,7 +28,7 @@ func UserCreate(ctx *gin.Context) interface{} {
 	}
 	if !b {
 		for _, err := range valid.Errors {
-			//log.Println(err.Key, err.Message)
+			log.Log.Error("param valid err", zap.Error(err))
 			panic(err)
 		}
 	}

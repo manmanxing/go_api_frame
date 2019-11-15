@@ -1,4 +1,4 @@
-package resultInfo
+package errcode
 
 //自定义错误返回信息
 //code=1 表示成功，code=-1 表示失败。

@@ -32,6 +32,7 @@ type Config struct {
 	EmailPass       string        `yaml:"emailPass"`
 	EmailPort       string        `yaml:"emailPort"`
 	EmailSSL        bool          `yaml:"emailSSL"`
+	JwtSecret       int           `yaml:"jwtSecret"`
 }
 
 func InitConfig() {

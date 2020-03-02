@@ -2,8 +2,8 @@ package jwt
 
 import (
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common"
 	"goApiFrame/web/errcode"
+	"goApiFrame/web/model/jwt"
 	"net/http"
 	"time"
 )
@@ -22,7 +22,7 @@ func JWT() gin.HandlerFunc {
 		if token == "" {
 			code = errcode.ERROR_AUTH_CHECK_TOKEN_FAIL
 		} else {
-			claims, err := common.ParseToken(token)
+			claims, err := jwt.ParseToken(token)
 			if err != nil {
 				code = errcode.ERROR_AUTH_CHECK_TOKEN_FAIL
 			} else if time.Now().Unix() > claims.ExpiresAt {

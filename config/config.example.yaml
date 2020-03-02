@@ -4,6 +4,7 @@ connectType: mysql
 maxIdleConns: 100
 maxOpenConns: 100
 connMaxLifetime: 5                #默认最大值为10
+pagesize: 20
 
 #日志文件
 loglevel: debug                   # debug   info   error
@@ -16,6 +17,8 @@ hookCompress: true                #是否压缩
 serviceName: goApiFrame           #服务名
 port: 6004                        #web端口
 host: 127.0.0.1
+#debug or release
+runMode: debug
 
 #捕获异常邮件设置
 sendEmail: true

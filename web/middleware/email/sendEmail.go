@@ -3,7 +3,6 @@ package email
 import (
 	"fmt"
 	"goApiFrame/web/common"
-	"goApiFrame/web/util"
 	"gopkg.in/gomail.v2"
 	"runtime/debug"
 	"strings"
@@ -15,7 +14,7 @@ func Email(str, url, ua, ip string) {
 		//开启发送邮件功能
 		return
 	}
-	now := time.Now().Local().Format(util.TimeFormat)
+	now := time.Now().Local().Format(common.TimeFormat)
 	DebugStack := ""
 	for _, v := range strings.Split(string(debug.Stack()), "\n") {
 		DebugStack += v + "<br>"

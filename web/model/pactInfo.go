@@ -1,15 +1,19 @@
 package model
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/validation"
+	"goApiFrame/web/common"
+	"goApiFrame/web/errcode"
+	"strconv"
 	"strings"
 )
 
 //合同表
 type PactInfo struct {
-	Id          string `xorm:"int pk autoincr 'id'" json:"id"`
+	Id          int    `xorm:"int pk autoincr 'id'" json:"id"`
 	Name        string `xorm:"varchar(50) 'name' notnull  COMMENT '合同名称'"  json:"name" valid:"MaxSize(10);MinSize(1)"` //合同名称
-	Status      int    `xorm:"smallint(2) 'status' default(0) COMMENT '合同状态，-1为删除'" json:"status" valid:"Range(0,2)"`  //合同状态
+	Status      int    `xorm:"smallint(2) 'status' default(0) COMMENT '合同状态，-1为删除'" json:"status" valid:"Range(-1,2)"` //合同状态
 	Context     string `xorm:"text 'context' default('') COMMENT '合同内容'" json:"context"`                               //合同内容
 	ImageUrl    string `xorm:"varchar(255) 'image_url' default('') COMMENT '合同照片'" json:"image_url"`                   //合同照片
 	Remark      string `xorm:"varchar(255) 'remark' default('') COMMENT '合同备注'" json:"remark" valid:"MaxSize(500)"`    //合同备注
@@ -26,6 +30,31 @@ func (u *PactInfo) Valid(v *validation.Validation) {
 	}
 }
 
-func (user PactInfo) Create() PactInfo {
-	return user
+func (p *PactInfo) Insert() bool {
+	_, err := common.Engine.Insert(p)
+	if err != nil {
+		fmt.Println("insert pact err:", err)
+		panic(errcode.Database_err)
+	}
+	return true
+}
+
+func (p *PactInfo) Find(pageSize int) []PactInfo {
+	result := make([]PactInfo, 0)
+	err := common.Engine.Limit(common.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
+	if err != nil {
+		fmt.Println("find pact err:", err)
+		panic(errcode.Database_err)
+	}
+	return result
+}
+
+func (p *PactInfo) Delete(id int) bool {
+	sql := fmt.Sprintf("update pact_info set status = %s where id = %s", strconv.Itoa(common.Delete), strconv.Itoa(id))
+	return common.Exec(sql)
+}
+
+func (p *PactInfo) Update(name string, id int) bool {
+	sql := fmt.Sprintf("update pact_info set name = '%s' where id = %s", name, strconv.Itoa(id))
+	return common.Exec(sql)
 }

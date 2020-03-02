@@ -5,7 +5,6 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"goApiFrame/web/common"
-	"goApiFrame/web/util"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
 	"time"
@@ -19,22 +18,22 @@ var development zap.Option
 
 func getResponseHook() lumberjack.Logger {
 	response_hook := lumberjack.Logger{
-		Filename:   "./logs/response/" + time.Now().Format(util.DateFormat) + ".log", // 日志文件路径
-		MaxSize:    common.MyConfig.HookMaxSize,                                      // 每个日志文件保存的最大尺寸 单位：M
-		MaxBackups: common.MyConfig.HookMaxBackups,                                   // 日志文件最多保存多少个备份
-		MaxAge:     common.MyConfig.HookMaxAge,                                       // 文件最多保存多少天
-		Compress:   common.MyConfig.HookCompress,                                     // 是否压缩
+		Filename:   "./logs/response/" + time.Now().Format(common.DateFormat) + ".log", // 日志文件路径
+		MaxSize:    common.MyConfig.HookMaxSize,                                        // 每个日志文件保存的最大尺寸 单位：M
+		MaxBackups: common.MyConfig.HookMaxBackups,                                     // 日志文件最多保存多少个备份
+		MaxAge:     common.MyConfig.HookMaxAge,                                         // 文件最多保存多少天
+		Compress:   common.MyConfig.HookCompress,                                       // 是否压缩
 	}
 	return response_hook
 }
 
 func getErrorHook() lumberjack.Logger {
 	err_hook := lumberjack.Logger{
-		Filename:   "./logs/err/" + time.Now().Format(util.DateFormat) + ".log", // 日志文件路径
-		MaxSize:    common.MyConfig.HookMaxSize,                                 // 每个日志文件保存的最大尺寸 单位：M
-		MaxBackups: common.MyConfig.HookMaxBackups,                              // 日志文件最多保存多少个备份
-		MaxAge:     common.MyConfig.HookMaxAge,                                  // 文件最多保存多少天
-		Compress:   common.MyConfig.HookCompress,                                // 是否压缩
+		Filename:   "./logs/err/" + time.Now().Format(common.DateFormat) + ".log", // 日志文件路径
+		MaxSize:    common.MyConfig.HookMaxSize,                                   // 每个日志文件保存的最大尺寸 单位：M
+		MaxBackups: common.MyConfig.HookMaxBackups,                                // 日志文件最多保存多少个备份
+		MaxAge:     common.MyConfig.HookMaxAge,                                    // 文件最多保存多少天
+		Compress:   common.MyConfig.HookCompress,                                  // 是否压缩
 	}
 	return err_hook
 }

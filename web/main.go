@@ -18,7 +18,7 @@ func main() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 	gin.SetMode(common.MyConfig.RunMode)
-	router.UserRouter(r)
+	router.PactRouter(r)
 	err := r.Run(":" + strconv.Itoa(common.MyConfig.Port))
 	if err != nil {
 		fmt.Println(fmt.Errorf("engine run err %s", err))

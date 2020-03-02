@@ -1,15 +1,14 @@
-package util
+package common
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common"
-	"strconv"
+	"goApiFrame/web/errcode"
 	"time"
 )
 
 const DateFormat = "2006-01-02"          //格式化日期
 const TimeFormat = "2006-01-02 15:04:05" //格式化时间
+const Delete = -1
 
 func JudgeDate(a ...string) bool {
 	if len(a) == 0 {
@@ -24,14 +23,20 @@ func JudgeDate(a ...string) bool {
 	return true
 }
 
-func GetPage(c *gin.Context) int {
+func GetPage(page int) int {
 	result := 0
-	page, err := strconv.Atoi(c.Query("page"))
-	if err != nil {
-		fmt.Println("context query page err:", err)
-	}
 	if page > 0 {
-		result = (page - 1) * common.MyConfig.PageSize
+		result = (page - 1) * MyConfig.PageSize
 	}
 	return result
+}
+
+func Exec(sql string) bool {
+	_, err := Engine.Exec(sql)
+	if err != nil {
+		fmt.Println("exec pact err:", err)
+		fmt.Println("exec sql:", sql)
+		panic(errcode.Database_err)
+	}
+	return true
 }

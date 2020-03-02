@@ -18,7 +18,6 @@ func GetErr(code string) ResultInfo {
 			Msg:  error,
 			Data: nil,
 		}
-
 	} else {
 		return ResultInfo{
 			Code: "-1",
@@ -27,9 +26,3 @@ func GetErr(code string) ResultInfo {
 		}
 	}
 }
-
-var ErrMap = map[string]string{
-	"100002": "参数错误",
-}
-
-var Params_err = "100002" //参数错误

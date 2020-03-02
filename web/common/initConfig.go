@@ -1,9 +1,9 @@
 package common
 
 import (
-	"github.com/prometheus/common/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"log"
 	"time"
 )
 
@@ -13,11 +13,13 @@ var MyConfig Config
 type Config struct {
 	Host            string        `yaml:"host"`
 	Port            int           `yaml:"port"`
+	RunMode         string        `yaml:"runMode"`
 	Connect         string        `yaml:"connect"`
 	ConnectType     string        `yaml:"connectType"`
 	MaxIdleConns    int           `yaml:"maxIdleConns"`
 	MaxOpenConns    int           `yaml:"maxOpenConns"`
 	ConnMaxLifetime time.Duration `yaml:"connMaxLifetime"`
+	PageSize        int           `yaml:"pagesize"`
 	Loglevel        string        `yaml:"loglevel"`
 	HookMaxSize     int           `yaml:"hookMaxSize"`
 	HookMaxBackups  int           `yaml:"hookMaxBackups"`

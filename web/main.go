@@ -16,7 +16,7 @@ import (
 
 func init() {
 	common.InitConfig()
-	common.InitDataEngine()
+	//common.InitDataEngine()
 	log.InitLogger()
 
 	signalChan := make(chan os.Signal)

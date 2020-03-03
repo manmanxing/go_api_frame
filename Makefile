@@ -1,5 +1,5 @@
 #项目路径为 /home/USER/xxx/work/src/goApiFrame
-export GOPATH=/home/USER/xxx/work
+export GOPATH=/home/zengjie/work
 APPS=goApiFrame
 all: $(APPS)
 goApiFrame:

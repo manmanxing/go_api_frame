@@ -4,7 +4,6 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"goApiFrame/web/common"
-	"goApiFrame/web/common/util"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
 	"time"
@@ -18,14 +17,15 @@ SugaredLogger 与 Logger 对比
 {"level":"ERROR","time":"2020-03-03T10:37:48.862+0800","caller":"C:/Users/xdf/go/src/goApiFrame/web/main.go:24","msg":"main test err"}
 */
 var SugarLogger *zap.SugaredLogger
+var timeFormat = "20060102"
 
 func getHook(path string) lumberjack.Logger {
 	response_hook := lumberjack.Logger{
-		Filename:   path + time.Now().Format(util.DateFormat) + ".log", // 日志文件路径
-		MaxSize:    common.MyConfig.HookMaxSize,                        // 每个日志文件保存的最大尺寸 单位：M
-		MaxBackups: common.MyConfig.HookMaxBackups,                     // 日志文件最多保存多少个备份
-		MaxAge:     common.MyConfig.HookMaxAge,                         // 文件最多保存多少天
-		Compress:   common.MyConfig.HookCompress,                       // 是否压缩
+		Filename:   path + time.Now().Format(timeFormat) + ".log", // 日志文件路径
+		MaxSize:    common.MyConfig.HookMaxSize,                   // 每个日志文件保存的最大尺寸 单位：M
+		MaxBackups: common.MyConfig.HookMaxBackups,                // 日志文件最多保存多少个备份
+		MaxAge:     common.MyConfig.HookMaxAge,                    // 文件最多保存多少天
+		Compress:   common.MyConfig.HookCompress,                  // 是否压缩
 	}
 	return response_hook
 }

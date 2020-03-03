@@ -20,6 +20,9 @@ host: 127.0.0.1
 #debug or release
 runMode: debug
 
+#jwt
+jwtSecret: 233
+
 #捕获异常邮件设置
 sendEmail: true
 fromEmailUserName: admin@123.com  #发件人邮箱
@@ -27,3 +30,6 @@ emailPass: 123456  #邮箱密码
 toEmailUser: tom@123.com   #收件人，可以为多个，以逗号隔开
 emailPort: 465                  #邮箱端口
 emailSSL: true
+
+readTimeout: 60
+writeTimeout: 60

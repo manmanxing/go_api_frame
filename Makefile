@@ -2,7 +2,7 @@
 export GOPATH=/home/USER/xxx/work
 APPS=goApiFrame
 all: $(APPS)
-ad_backend_local:
+goApiFrame:
 	go build -o $@  web/main.go
 check: test_log
 test_log:

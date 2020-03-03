@@ -11,4 +11,4 @@ make
 fi
 
 #echo ${1}
-nohup ./goApiFrame conf/conf.ini 2>&1 &
+nohup ./goApiFrame  2>&1 &

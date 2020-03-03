@@ -1,8 +1,8 @@
 package common
 
 import (
-	"fmt"
 	"goApiFrame/web/errcode"
+	"goApiFrame/web/middleware/log"
 	"time"
 )
 
@@ -34,8 +34,7 @@ func GetPage(page int) int {
 func Exec(sql string) bool {
 	_, err := Engine.Exec(sql)
 	if err != nil {
-		fmt.Println("exec pact err:", err)
-		fmt.Println("exec sql:", sql)
+		log.SugarLogger.Error("err:", err, " sql:", sql)
 		panic(errcode.Database_err)
 	}
 	return true

@@ -25,7 +25,7 @@ func Run(handleFunc handlerFunc) gin.HandlerFunc {
 	}
 }
 
-//有两种错误，一种是panic（errcode），一种是 validation 的自定义验证错误
+//有两种错误，一种是panic（errcode）,为 strin 类型，一种是 validation 的自定义验证错误
 func ErrHandle(c *gin.Context, e interface{}) {
 	switch value := e.(type) {
 	case string:

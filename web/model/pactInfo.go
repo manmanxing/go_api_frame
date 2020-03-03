@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"goApiFrame/web/common"
 	"goApiFrame/web/errcode"
+	"goApiFrame/web/middleware/log"
 	"strconv"
 	"strings"
 )
@@ -34,6 +35,7 @@ func (p *PactInfo) Insert() bool {
 	_, err := common.Engine.Insert(p)
 	if err != nil {
 		fmt.Println("insert pact err:", err)
+		log.SugarLogger.Error("err:", err)
 		panic(errcode.Database_err)
 	}
 	return true
@@ -43,7 +45,7 @@ func (p *PactInfo) Find(pageSize int) []PactInfo {
 	result := make([]PactInfo, 0)
 	err := common.Engine.Limit(common.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
 	if err != nil {
-		fmt.Println("find pact err:", err)
+		log.SugarLogger.Error("err:", err)
 		panic(errcode.Database_err)
 	}
 	return result

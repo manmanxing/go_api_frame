@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"goApiFrame/web/common"
 	"goApiFrame/web/errcode"
+	"goApiFrame/web/middleware/log"
 	"goApiFrame/web/model"
 	"strconv"
 )
@@ -15,11 +15,11 @@ func PactCreate(ctx *gin.Context) interface{} {
 	valid := validation.Validation{}
 	b, err := valid.Valid(p)
 	if err != nil {
-		fmt.Println("valid fail err:", err)
+		log.SugarLogger.Error("err:", err)
 	}
 	if !b {
 		for _, err := range valid.Errors {
-			//log.Log.Error("param valid err", zap.Error(err))
+			log.SugarLogger.Error("err:", err)
 			panic(err)
 		}
 	}
@@ -44,18 +44,18 @@ func PactUpdate(ctx *gin.Context) interface{} {
 	p := new(model.PactInfo)
 	err := ctx.ShouldBind(p)
 	if err != nil {
-		fmt.Println("bind err:", err)
+		log.SugarLogger.Error("err:", err)
 		panic(errcode.Database_err)
 	}
 	//如果只是更新单个字段，那就单独 valid字段
 	valid := validation.Validation{}
 	b, err := valid.Valid(p)
 	if err != nil {
-		fmt.Println("valid fail err:", err)
+		log.SugarLogger.Error("err:", err)
 	}
 	if !b {
 		for _, err := range valid.Errors {
-			//log.Log.Error("param valid err", zap.Error(err))
+			log.SugarLogger.Error("err:", err)
 			panic(err)
 		}
 	}

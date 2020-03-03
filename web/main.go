@@ -5,14 +5,15 @@ import (
 	"github.com/gin-gonic/gin"
 	"goApiFrame/web/common"
 	"goApiFrame/web/middleware/jwt"
+	"goApiFrame/web/middleware/log"
 	"goApiFrame/web/router"
 	"strconv"
 )
 
 func init() {
 	common.InitConfig()
-	common.InitDataEngine()
-	//InitLogger()
+	//common.InitDataEngine()
+	log.InitLogger()
 }
 
 func main() {

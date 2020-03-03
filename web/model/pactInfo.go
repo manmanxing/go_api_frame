@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"github.com/astaxie/beego/validation"
 	"goApiFrame/web/common"
-	"goApiFrame/web/errcode"
+	"goApiFrame/web/common/errcode"
+	"goApiFrame/web/common/util"
 	"goApiFrame/web/middleware/log"
 	"strconv"
 	"strings"
@@ -52,11 +53,21 @@ func (p *PactInfo) Find(pageSize int) []PactInfo {
 }
 
 func (p *PactInfo) Delete(id int) bool {
-	sql := fmt.Sprintf("update pact_info set status = %s where id = %s", strconv.Itoa(common.Delete), strconv.Itoa(id))
-	return common.Exec(sql)
+	sql := fmt.Sprintf("update pact_info set status = %s where id = %s", strconv.Itoa(util.Delete), strconv.Itoa(id))
+	ok, err := util.Exec(sql)
+	if err != nil && ok == false {
+		log.SugarLogger.Error("err:", err)
+		panic(errcode.Params_err)
+	}
+	return true
 }
 
 func (p *PactInfo) Update(name string, id int) bool {
 	sql := fmt.Sprintf("update pact_info set name = '%s' where id = %s", name, strconv.Itoa(id))
-	return common.Exec(sql)
+	ok, err := util.Exec(sql)
+	if err != nil && ok == false {
+		log.SugarLogger.Error("err:", err)
+		panic(errcode.Params_err)
+	}
+	return true
 }

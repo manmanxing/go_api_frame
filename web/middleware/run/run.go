@@ -3,7 +3,7 @@ package run
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/errcode"
+	"goApiFrame/web/common/errcode"
 )
 
 type handlerFunc func(*gin.Context) interface{}

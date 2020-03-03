@@ -3,8 +3,8 @@ package controller
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common"
-	"goApiFrame/web/errcode"
+	"goApiFrame/web/common/errcode"
+	"goApiFrame/web/common/util"
 	"goApiFrame/web/middleware/log"
 	"goApiFrame/web/model"
 	"strconv"
@@ -28,7 +28,7 @@ func PactCreate(ctx *gin.Context) interface{} {
 
 func PactFind(ctx *gin.Context) interface{} {
 	page, _ := strconv.Atoi(ctx.DefaultQuery("page", "1"))
-	start := common.GetPage(page)
+	start := util.GetPage(page)
 	p := new(model.PactInfo)
 	return p.Find(start)
 }

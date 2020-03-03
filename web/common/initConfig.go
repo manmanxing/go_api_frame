@@ -33,6 +33,8 @@ type Config struct {
 	EmailPort       string        `yaml:"emailPort"`
 	EmailSSL        bool          `yaml:"emailSSL"`
 	JwtSecret       int           `yaml:"jwtSecret"`
+	ReadTimeout     time.Duration `yaml:"readTimeout"`
+	WriteTimeout    time.Duration `yaml:"writeTimeout"`
 }
 
 func InitConfig() {

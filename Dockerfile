@@ -1,6 +1,6 @@
+#拉取 golang 最新的镜像
 FROM golang:latest
-
-#拉取golang最新的镜像
+#设置 golang 环境变量
 ENV GOPROXY https://goproxy.cn,direct
 
 #参考网址：https://github.com/manmanxing/goApiFrame

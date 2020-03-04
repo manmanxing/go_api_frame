@@ -3,6 +3,6 @@ export GOPATH=/home/zengjie/work
 APPS=go_api_frame
 all: $(APPS)
 go_api_frame:
-	go build -o $@  web/main.go
+	go build -o $@  main.go
 clean:
 	rm -fr $(APPS)

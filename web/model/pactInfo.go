@@ -33,6 +33,7 @@ func (u *PactInfo) Valid(v *validation.Validation) {
 }
 
 func (p *PactInfo) Insert() bool {
+	p.Status = common.Normal
 	_, err := common.Engine.Insert(p)
 	if err != nil {
 		fmt.Println("insert pact err:", err)
@@ -53,7 +54,7 @@ func (p *PactInfo) Find(pageSize int) []PactInfo {
 }
 
 func (p *PactInfo) Delete(id int) bool {
-	sql := fmt.Sprintf("update pact_info set status = %s where id = %s", strconv.Itoa(util.Delete), strconv.Itoa(id))
+	sql := fmt.Sprintf("update pact_info set status = %s where id = %s", strconv.Itoa(common.Delete), strconv.Itoa(id))
 	ok, err := util.Exec(sql)
 	if err != nil && ok == false {
 		log.SugarLogger.Error("err:", err)

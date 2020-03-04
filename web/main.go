@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	//"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 	"goApiFrame/web/common"
@@ -30,9 +32,21 @@ func init() {
 	}()
 }
 
+// @title Go-site Example API
+// @version 1.0
+// @description This is a sample go-API server.
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host 127.0.0.1
+// @BasePath ""
 func main() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery(), jwt.JWT())
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	gin.SetMode(common.MyConfig.RunMode)
 	router.PactRouter(r)
 	router.UserRouter(r)

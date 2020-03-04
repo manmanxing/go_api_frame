@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"goApiFrame/web/common/errcode"
+	"net/http"
 )
 
 type handlerFunc func(*gin.Context) interface{}
@@ -17,7 +18,7 @@ func Run(handleFunc handlerFunc) gin.HandlerFunc {
 			}
 		}()
 		result := handleFunc(context)
-		context.JSON(200, gin.H{
+		context.JSON(http.StatusOK, gin.H{
 			"code":  "0",
 			"error": nil,
 			"data":  result,
@@ -31,14 +32,14 @@ func ErrHandle(c *gin.Context, e interface{}) {
 	case string:
 		result := errcode.GetErr(e.(string))
 		//go email.Email(result.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"code":  result.Code,
 			"error": result.Msg,
 			"data":  nil,
 		})
 	case *validation.Error:
 		//go email.Email(value.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"code":  errcode.GetErr(errcode.Params_err).Code,
 			"error": value.Message,
 			"data":  nil,

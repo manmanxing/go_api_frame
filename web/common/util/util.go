@@ -8,7 +8,6 @@ import (
 
 const DateFormat = "2006-01-02"          //格式化日期
 const TimeFormat = "2006-01-02 15:04:05" //格式化时间
-const Delete = -1
 
 func GetPage(page int) int {
 	result := 0

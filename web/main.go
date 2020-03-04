@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 	//"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
+	"github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"goApiFrame/web/common"
 	"goApiFrame/web/middleware/jwt"
 	"goApiFrame/web/middleware/log"

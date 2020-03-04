@@ -12,6 +12,7 @@ github.com/astaxie/beego/validation
 github.com/dgrijalva/jwt-go
 # github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6
 ## explicit
+github.com/fvbock/endless
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
 # github.com/gin-gonic/gin v1.5.0

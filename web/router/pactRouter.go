@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/controller"
-	"goApiFrame/web/middleware/run"
+	"go_api_frame/web/controller"
+	"go_api_frame/web/middleware/run"
 )
 
 func PactRouter(r *gin.Engine) {

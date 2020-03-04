@@ -3,10 +3,10 @@ package model
 import (
 	"fmt"
 	"github.com/astaxie/beego/validation"
-	"goApiFrame/web/common"
-	"goApiFrame/web/common/errcode"
-	"goApiFrame/web/common/util"
-	"goApiFrame/web/middleware/log"
+	"go_api_frame/web/common"
+	"go_api_frame/web/common/errcode"
+	"go_api_frame/web/common/util"
+	"go_api_frame/web/middleware/log"
 	"strconv"
 	"strings"
 )

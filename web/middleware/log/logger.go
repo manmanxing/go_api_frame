@@ -3,7 +3,7 @@ package log
 import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"goApiFrame/web/common"
+	"go_api_frame/web/common"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
 	"time"

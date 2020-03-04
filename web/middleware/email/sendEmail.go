@@ -2,8 +2,8 @@ package email
 
 import (
 	"fmt"
-	"goApiFrame/web/common"
-	"goApiFrame/web/common/util"
+	"go_api_frame/web/common"
+	"go_api_frame/web/common/util"
 	"gopkg.in/gomail.v2"
 	"runtime/debug"
 	"strings"

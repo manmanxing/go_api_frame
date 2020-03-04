@@ -3,8 +3,8 @@ package jwt
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"goApiFrame/web/common"
-	"goApiFrame/web/model"
+	"go_api_frame/web/common"
+	"go_api_frame/web/model"
 	"time"
 )
 

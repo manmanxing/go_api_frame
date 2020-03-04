@@ -5,10 +5,10 @@
 #    exit 1
 #fi
 #检查 goApiFrame 是否存在并是一个文件
-if [ ! -f goApiFrame ];then
+if [ ! -f go_api_frame ];then
 #make clean
 make
 fi
 
 #echo ${1}
-nohup ./goApiFrame  2>&1 &
+nohup ./go_api_frame  2>&1 &

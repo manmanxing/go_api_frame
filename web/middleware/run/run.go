@@ -3,7 +3,7 @@ package run
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common/errcode"
+	"go_api_frame/web/common/errcode"
 	"net/http"
 )
 

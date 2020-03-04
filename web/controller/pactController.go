@@ -3,10 +3,10 @@ package controller
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common/errcode"
-	"goApiFrame/web/common/util"
-	"goApiFrame/web/middleware/log"
-	"goApiFrame/web/model"
+	"go_api_frame/web/common/errcode"
+	"go_api_frame/web/common/util"
+	"go_api_frame/web/middleware/log"
+	"go_api_frame/web/model"
 	"strconv"
 )
 

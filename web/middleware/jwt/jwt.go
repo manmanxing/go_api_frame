@@ -2,8 +2,8 @@ package jwt
 
 import (
 	"github.com/gin-gonic/gin"
-	"goApiFrame/web/common/errcode"
-	"goApiFrame/web/model/jwt"
+	"go_api_frame/web/common/errcode"
+	"go_api_frame/web/model/jwt"
 	"net/http"
 	"time"
 )

@@ -1,6 +1,7 @@
 package model
 
 type UserInfo struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Id       int    `xorm:"int pk autoincr 'id'" json:"id"`
+	Username string `xorm:"varchar(50) 'username' notnull "json:"username"`
+	Password string `xorm:"varchar(50) 'password' notnull "json:"password"`
 }

@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/astaxie/beego/validation"
 	"go_api_frame/web/common"
+	"go_api_frame/web/common/config"
+	"go_api_frame/web/common/database"
 	"go_api_frame/web/common/errcode"
 	"go_api_frame/web/common/util"
 	"go_api_frame/web/middleware/log"
@@ -14,11 +16,11 @@ import (
 //合同表
 type PactInfo struct {
 	Id          int    `xorm:"int pk autoincr 'id'" json:"id"`
-	Name        string `xorm:"varchar(50) 'name' notnull  COMMENT '合同名称'"  json:"name" valid:"MaxSize(10);MinSize(1)"` //合同名称
-	Status      int    `xorm:"smallint(2) 'status' default(0) COMMENT '合同状态，-1为删除'" json:"status" valid:"Range(-1,2)"` //合同状态
-	Context     string `xorm:"text 'context' default('') COMMENT '合同内容'" json:"context"`                               //合同内容
-	ImageUrl    string `xorm:"varchar(255) 'image_url' default('') COMMENT '合同照片'" json:"image_url"`                   //合同照片
-	Remark      string `xorm:"varchar(255) 'remark' default('') COMMENT '合同备注'" json:"remark" valid:"MaxSize(500)"`    //合同备注
+	Name        string `xorm:"varchar(50) 'name' notnull "  json:"name" valid:"MaxSize(10);MinSize(1)"` //合同名称
+	Status      int    `xorm:"smallint(2) 'status' default(0) " json:"status" valid:"Range(-1,2)"`      //合同状态，-1为删除
+	Context     string `xorm:"text 'context' " json:"context"`                                          //合同内容
+	ImageUrl    string `xorm:"varchar(255) 'image_url' default('') " json:"image_url"`                  //合同照片
+	Remark      string `xorm:"varchar(255) 'remark' default('') " json:"remark" valid:"MaxSize(500)"`   //合同备注
 	CreatedTime int    `xorm:"int(10)  'create_time'" json:"create_time" `
 	UpdatedTime int    `xorm:"int(10)  'update_time'" json:"update_time" `
 }
@@ -34,7 +36,7 @@ func (u *PactInfo) Valid(v *validation.Validation) {
 
 func (p *PactInfo) Insert() bool {
 	p.Status = common.Normal
-	_, err := common.Engine.Insert(p)
+	_, err := database.Engine.Insert(p)
 	if err != nil {
 		fmt.Println("insert pact err:", err)
 		log.SugarLogger.Error("err:", err)
@@ -45,7 +47,7 @@ func (p *PactInfo) Insert() bool {
 
 func (p *PactInfo) Find(pageSize int) []PactInfo {
 	result := make([]PactInfo, 0)
-	err := common.Engine.Limit(common.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
+	err := database.Engine.Limit(config.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
 	if err != nil {
 		log.SugarLogger.Error("err:", err)
 		panic(errcode.Database_err)

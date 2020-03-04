@@ -3,7 +3,7 @@ package jwt
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"go_api_frame/web/common"
+	"go_api_frame/web/common/config"
 	"go_api_frame/web/model"
 	"time"
 )
@@ -43,7 +43,7 @@ func GenerateToken(m *model.UserInfo) (string, error) {
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			IssuedAt:  time.Now().Unix(),
-			Issuer:    common.MyConfig.ServiceName, //服务名,
+			Issuer:    config.MyConfig.ServiceName, //服务名,
 		},
 	}
 	//包含SigningMethodHS256、SigningMethodHS384、SigningMethodHS512三种crypto.Hash方案

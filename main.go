@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"go_api_frame/web/common/config"
+	"go_api_frame/web/common/database"
+
 	//"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"go_api_frame/web/common"
 	"go_api_frame/web/middleware/jwt"
 	"go_api_frame/web/middleware/log"
 	"go_api_frame/web/router"
@@ -17,8 +19,8 @@ import (
 )
 
 func init() {
-	common.InitConfig()
-	common.InitDataEngine()
+	config.InitConfig()
+	database.InitDataEngine()
 	log.InitLogger()
 
 	signalChan := make(chan os.Signal)
@@ -47,10 +49,10 @@ func main() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery(), jwt.JWT())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	gin.SetMode(common.MyConfig.RunMode)
+	gin.SetMode(config.MyConfig.RunMode)
 	router.PactRouter(r)
 	router.UserRouter(r)
-	err := r.Run(":" + strconv.Itoa(common.MyConfig.Port))
+	err := r.Run(":" + strconv.Itoa(config.MyConfig.Port))
 	if err != nil {
 		fmt.Println(fmt.Errorf("engine run err %s", err))
 	}

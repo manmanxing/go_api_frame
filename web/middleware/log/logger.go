@@ -3,7 +3,7 @@ package log
 import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"go_api_frame/web/common"
+	"go_api_frame/web/common/config"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
 	"time"
@@ -22,10 +22,10 @@ var timeFormat = "20060102"
 func getHook(path string) lumberjack.Logger {
 	response_hook := lumberjack.Logger{
 		Filename:   path + time.Now().Format(timeFormat) + ".log", // 日志文件路径
-		MaxSize:    common.MyConfig.HookMaxSize,                   // 每个日志文件保存的最大尺寸 单位：M
-		MaxBackups: common.MyConfig.HookMaxBackups,                // 日志文件最多保存多少个备份
-		MaxAge:     common.MyConfig.HookMaxAge,                    // 文件最多保存多少天
-		Compress:   common.MyConfig.HookCompress,                  // 是否压缩
+		MaxSize:    config.MyConfig.HookMaxSize,                   // 每个日志文件保存的最大尺寸 单位：M
+		MaxBackups: config.MyConfig.HookMaxBackups,                // 日志文件最多保存多少个备份
+		MaxAge:     config.MyConfig.HookMaxAge,                    // 文件最多保存多少天
+		Compress:   config.MyConfig.HookCompress,                  // 是否压缩
 	}
 	return response_hook
 }
@@ -51,7 +51,7 @@ func getEncoderConfig() zapcore.EncoderConfig {
 func InitLogger() {
 	// 设置日志级别,debug可以打印出info,debug,warn；info级别可以打印warn，info；warn只能打印warn
 	var level zapcore.Level
-	switch common.MyConfig.Loglevel {
+	switch config.MyConfig.Loglevel {
 	case "debug":
 		level = zap.DebugLevel
 	case "info":

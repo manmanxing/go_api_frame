@@ -40,7 +40,7 @@ func (p *PactInfo) Insert() bool {
 	if err != nil {
 		fmt.Println("insert pact err:", err)
 		log.SugarLogger.Error("err:", err)
-		panic(errcode.Database_err)
+		panic(errcode.DatabaseErr)
 	}
 	return true
 }
@@ -50,7 +50,7 @@ func (p *PactInfo) Find(pageSize int) []PactInfo {
 	err := database.Engine.Limit(config.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
 	if err != nil {
 		log.SugarLogger.Error("err:", err)
-		panic(errcode.Database_err)
+		panic(errcode.DatabaseErr)
 	}
 	return result
 }
@@ -60,7 +60,7 @@ func (p *PactInfo) Delete(id int) bool {
 	ok, err := util.Exec(sql)
 	if err != nil && ok == false {
 		log.SugarLogger.Error("err:", err)
-		panic(errcode.Params_err)
+		panic(errcode.ParamsErr)
 	}
 	return true
 }
@@ -70,7 +70,7 @@ func (p *PactInfo) Update(name string, id int) bool {
 	ok, err := util.Exec(sql)
 	if err != nil && ok == false {
 		log.SugarLogger.Error("err:", err)
-		panic(errcode.Params_err)
+		panic(errcode.ParamsErr)
 	}
 	return true
 }

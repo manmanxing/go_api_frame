@@ -3,5 +3,5 @@ README.md
 sql
 .git
 vendor
-logs
+runtime
 config/config.example.yaml

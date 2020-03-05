@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"go_api_frame/web/common/config"
 	"go_api_frame/web/common/database"
+	"go_api_frame/web/common/upload"
+	"net/http"
 
 	//"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"go_api_frame/web/middleware/jwt"
 	"go_api_frame/web/middleware/log"
 	"go_api_frame/web/router"
 	"os"
@@ -47,11 +48,14 @@ func init() {
 // @BasePath ""
 func main() {
 	r := gin.New()
-	r.Use(gin.Logger(), gin.Recovery(), jwt.JWT())
+	//r.Use(gin.Logger(), gin.Recovery(), jwt.JWT())
+	r.Use(gin.Logger(), gin.Recovery())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.StaticFS(config.MyConfig.ImageSavePath, http.Dir(upload.GetImagePath()))
 	gin.SetMode(config.MyConfig.RunMode)
 	router.PactRouter(r)
 	router.UserRouter(r)
+	router.UploadRouter(r)
 	err := r.Run(":" + strconv.Itoa(config.MyConfig.Port))
 	if err != nil {
 		fmt.Println(fmt.Errorf("engine run err %s", err))

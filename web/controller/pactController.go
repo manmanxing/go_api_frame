@@ -25,7 +25,7 @@ func PactCreate(ctx *gin.Context) interface{} {
 	err := ctx.ShouldBind(p)
 	if err != nil {
 		log.SugarLogger.Error("err:", err)
-		panic(errcode.Database_err)
+		panic(errcode.DatabaseErr)
 	}
 	valid := validation.Validation{}
 	b, err := valid.Valid(p)
@@ -80,7 +80,7 @@ func PactUpdate(ctx *gin.Context) interface{} {
 	err := ctx.ShouldBind(p)
 	if err != nil {
 		log.SugarLogger.Error("err:", err)
-		panic(errcode.Database_err)
+		panic(errcode.DatabaseErr)
 	}
 	//如果只是更新单个字段，那就单独 valid字段
 	valid := validation.Validation{}

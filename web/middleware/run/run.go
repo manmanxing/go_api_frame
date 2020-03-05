@@ -40,7 +40,7 @@ func ErrHandle(c *gin.Context, e interface{}) {
 	case *validation.Error:
 		//go email.Email(value.Msg, c.Request.Method+"  "+c.Request.Host+c.Request.RequestURI, c.Request.UserAgent(), c.ClientIP())
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"code":  errcode.GetErr(errcode.Params_err).Code,
+			"code":  errcode.GetErr(errcode.ParamsErr).Code,
 			"error": value.Message,
 			"data":  nil,
 		})

@@ -1,6 +1,8 @@
 package util
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"go_api_frame/web/common/config"
@@ -25,4 +27,10 @@ func Exec(sql string) (bool, error) {
 		return false, errors.New(a)
 	}
 	return true, nil
+}
+
+func EncodeMD5(name string) string {
+	m := md5.New()
+	m.Write([]byte(name))
+	return hex.EncodeToString(m.Sum(nil))
 }

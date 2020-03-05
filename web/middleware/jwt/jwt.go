@@ -20,13 +20,13 @@ func JWT() gin.HandlerFunc {
 		var data interface{}
 		token := c.Query("token")
 		if token == "" {
-			code = errcode.ERROR_AUTH_CHECK_TOKEN_FAIL
+			code = errcode.ErrorAuthCheckTokenFail
 		} else {
 			claims, err := jwt.ParseToken(token)
 			if err != nil {
-				code = errcode.ERROR_AUTH_CHECK_TOKEN_FAIL
+				code = errcode.ErrorAuthCheckTokenFail
 			} else if time.Now().Unix() > claims.ExpiresAt {
-				code = errcode.ERROR_AUTH_CHECK_TOKEN_TIMEOUT
+				code = errcode.ErrorAuthCheckTokenTimeout
 			} else {
 				c.Set(contextKeyUserObj, claims.UserInfo)
 			}

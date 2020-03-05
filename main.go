@@ -5,6 +5,7 @@ import (
 	"go_api_frame/web/common/config"
 	"go_api_frame/web/common/database"
 	"go_api_frame/web/common/upload"
+	"go_api_frame/web/middleware/jwt"
 	"net/http"
 
 	//"github.com/fvbock/endless"
@@ -48,10 +49,11 @@ func init() {
 // @BasePath ""
 func main() {
 	r := gin.New()
-	//r.Use(gin.Logger(), gin.Recovery(), jwt.JWT())
-	r.Use(gin.Logger(), gin.Recovery())
+	r.Use(gin.Logger(), gin.Recovery(), jwt.JWT())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.StaticFS(config.MyConfig.ImageSavePath, http.Dir(upload.GetImagePath()))
+	//创建静态文件服务
+	//当访问 $HOST/upload/images 时，将会读取到 $GOPATH/src/go_api_frame/ImageSavePath 下的文件
+	r.StaticFS("/upload/images", http.Dir(upload.GetImagePath()))
 	gin.SetMode(config.MyConfig.RunMode)
 	router.PactRouter(r)
 	router.UserRouter(r)

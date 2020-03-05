@@ -1,3 +1,7 @@
 .idea
 README.md
 sql
+.git
+vendor
+logs
+config/config.example.yaml

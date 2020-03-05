@@ -29,6 +29,7 @@ type Config struct {
 	HookMaxBackups int    `yaml:"hookMaxBackups"`
 	HookMaxAge     int    `yaml:"hookMaxAge"`
 	HookCompress   bool   `yaml:"hookCompress"`
+	LogSavePath    string `yaml:"logSavePath"`
 	//服务器配置
 	ServiceName string `yaml:"serviceName"`
 	//email配置

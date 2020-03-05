@@ -62,7 +62,7 @@ func InitLogger() {
 		level = zap.InfoLevel
 	}
 	atomicLevel := zap.NewAtomicLevelAt(level)
-	errHook := getHook("./runtime/logs/err/")
+	errHook := getHook("./" + config.MyConfig.LogSavePath)
 	core := zapcore.NewCore(
 		zapcore.NewJSONEncoder(getEncoderConfig()),                                         // 编码器配置
 		zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(&errHook)), // 打印到控制台和文件

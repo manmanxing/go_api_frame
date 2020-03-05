@@ -1,7 +1,14 @@
 .idea
-README.md
-sql
 .git
+sql
 vendor
 runtime
 config/config.example.yaml
+.gitignore
+go.mod
+go.sum
+README.md
+Makefile
+restart.sh
+shutdown.sh
+start.sh

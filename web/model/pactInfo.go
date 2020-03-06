@@ -36,7 +36,7 @@ func (u *PactInfo) Valid(v *validation.Validation) {
 
 func (p *PactInfo) Insert() bool {
 	p.Status = common.Normal
-	_, err := database.Engine.Insert(p)
+	_, err := database.MyEngine.Insert(p)
 	if err != nil {
 		fmt.Println("insert pact err:", err)
 		log.SugarLogger.Error("err:", err)
@@ -47,7 +47,7 @@ func (p *PactInfo) Insert() bool {
 
 func (p *PactInfo) Find(pageSize int) []PactInfo {
 	result := make([]PactInfo, 0)
-	err := database.Engine.Limit(config.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
+	err := database.MyEngine.Limit(config.MyConfig.PageSize, pageSize).OrderBy("create_time").Find(result)
 	if err != nil {
 		log.SugarLogger.Error("err:", err)
 		panic(errcode.DatabaseErr)

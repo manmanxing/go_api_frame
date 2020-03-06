@@ -4,15 +4,16 @@ import (
 	"fmt"
 	"go_api_frame/web/common/config"
 	"go_api_frame/web/common/database"
+	"go_api_frame/web/common/redis"
 	"go_api_frame/web/common/upload"
 	"go_api_frame/web/middleware/jwt"
+	"go_api_frame/web/middleware/log"
 	"net/http"
 
 	//"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"go_api_frame/web/middleware/log"
 	"go_api_frame/web/router"
 	"os"
 	"os/signal"
@@ -24,6 +25,7 @@ func init() {
 	config.InitConfig()
 	database.InitDataEngine()
 	log.InitLogger()
+	redis.InitRedis()
 
 	signalChan := make(chan os.Signal)
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)

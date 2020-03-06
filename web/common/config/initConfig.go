@@ -43,6 +43,13 @@ type Config struct {
 	ImageSavePath  string `yaml:"imageSavePath"`
 	ImageMaxSize   int64  `yaml:"imageMaxSize"`
 	ImageAllowExts string `yaml:"imageAllowExts"`
+	//redis
+	RedisHost        string        `yaml:"redisHost"`
+	RedisPwd         string        `yaml:"redisPwd"`
+	RedisMaxIde      int           `yaml:"redisMaxIde"`      //最大空闲连接数
+	RedisActive      int           `yaml:"redisActive"`      //在给定时间内，允许分配的最大连接数（当为零时，没有限制）
+	RedisExpireTime  int           `yaml:"redisExpireTime"`  //过期时间
+	RedisIdleTimeout time.Duration `yaml:"redisIdleTimeout"` //在给定时间内将会保持空闲状态，若到达时间限制则关闭连接（当为零时，没有限制）
 }
 
 func InitConfig() {

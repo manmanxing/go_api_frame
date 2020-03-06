@@ -35,3 +35,11 @@ imageSavePath: runtime/upload/images/
 # MB
 imageMaxSize: 5
 imageAllowExts: .jpg,.png,.jpeg
+
+#redis
+redisHost: 127.0.0.1:6379
+redisPwd: 123456
+redisMaxIde: 30
+redisActive: 30
+redisIdleTimeout: 300
+redisExpireTime: 300

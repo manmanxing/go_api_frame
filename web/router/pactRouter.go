@@ -10,7 +10,7 @@ func PactRouter(r *gin.Engine) {
 	api := r.Group("/api/v1")
 	//获取合同列表
 	api.GET("/pact",
-		run.Run(controller.PactFind))
+		run.Run(controller.PactFind, run.Options{Cache: true}))
 	//新增合同
 	api.POST("/pact",
 		run.Run(controller.PactCreate))

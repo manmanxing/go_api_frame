@@ -9,7 +9,7 @@ import (
 	"xorm.io/core"
 )
 
-var Engine *xorm.Engine
+var MyEngine *xorm.Engine
 
 func InitDataEngine() {
 	engine, err := xorm.NewEngine(config.MyConfig.ConnectType, config.MyConfig.Connect)
@@ -28,5 +28,5 @@ func InitDataEngine() {
 	engine.SetConnMaxLifetime(config.MyConfig.ConnMaxLifetime)
 	//设置时区
 	engine.TZLocation, _ = time.LoadLocation("Asia/Shanghai")
-	Engine = engine
+	MyEngine = engine
 }

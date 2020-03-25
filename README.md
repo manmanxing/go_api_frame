@@ -14,7 +14,7 @@ go语言开发，开箱即用的API 框架的轮子，基于 Gin，xorm，beego�
 + 使用 JWT 进行身份校验
 + 优雅的退出和重启服务
 + 支持Swagger文档
-+ 部署到docker 
++ 支持部署到docker 
 + 支持shell脚本启动，重启，停止
 + 支持针对报错类型发送email通知
 + 采用 beego 的 validation的数据校验方式

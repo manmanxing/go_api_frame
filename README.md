@@ -1,6 +1,6 @@
 # go_api_frame
 
-go语言开发，开箱即用的API 框架的轮子，基于 Gin 基础
+go语言开发，开箱即用的API 框架的轮子，基于 Gin，xorm，beego，gomail框架
 基于go 1.13版本
 
 功能点：
@@ -16,3 +16,5 @@ go语言开发，开箱即用的API 框架的轮子，基于 Gin 基础
 + 支持Swagger文档
 + 部署到docker 
 + 支持shell脚本启动，重启，停止
++ 支持针对报错类型发送email通知
++ 采用 beego 的 validation的数据校验方式
